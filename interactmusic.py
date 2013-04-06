@@ -24,8 +24,12 @@ while True:
     cv.Circle(img, (100, 100), 40, (255, 0, 0), thickness=1, lineType=8, shift=0)
 
     # Effets:
+
     # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#smooth
-    cv.Smooth(img, result, cv.CV_GAUSSIAN, 9, 9)
+    # cv.Smooth(img, result, cv.CV_GAUSSIAN, 9, 9)
+
+    # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#dilate
+    cv.Dilate(img, result, None, 5)
 
     # Shows the image
     cv.ShowImage("camera", result)
