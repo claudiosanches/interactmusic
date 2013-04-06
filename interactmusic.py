@@ -29,7 +29,10 @@ while True:
     # cv.Smooth(img, result, cv.CV_GAUSSIAN, 9, 9)
 
     # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#dilate
-    cv.Dilate(img, result, None, 5)
+    # cv.Dilate(img, result, None, 5)
+
+    # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#erode
+    cv.Erode(img, result, None, 1)
 
     # Shows the image
     cv.ShowImage("camera", result)
