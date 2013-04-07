@@ -13,22 +13,24 @@ capture = cv.CreateCameraCapture(0)
 # Creates the result image
 # result = cv.CreateImage((width, height), cv.IPL_DEPTH_8U, 3)
 
-frame = cv.QueryFrame(capture)
-temp = cv.CloneImage(frame)
-cv.Smooth(temp, temp, cv.CV_BLUR, 5, 5)
+# frame = cv.QueryFrame(capture)
+# temp = cv.CloneImage(frame)
+# cv.Smooth(temp, temp, cv.CV_BLUR, 5, 5)
+
+haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml")
 
 while True:
     # Creates the frame
     img = cv.QueryFrame(capture)
 
     # http://opencv.willowgarage.com/documentation/python/core_operations_on_arrays.html?highlight=absdiff#absdiff
-    cv.AbsDiff(img, temp, img)
+    # cv.AbsDiff(img, temp, img)
 
     # http://opencv.willowgarage.com/documentation/python/drawing_functions.html#rectangle
-    cv.Rectangle(img, (200, 150), (300, 250), (0, 0, 255), 1, 0)
+    # cv.Rectangle(img, (200, 150), (300, 250), (0, 0, 255), 1, 0)
 
     # http://opencv.willowgarage.com/documentation/python/drawing_functions.html#circle
-    cv.Circle(img, (100, 100), 40, (255, 0, 0), thickness=1, lineType=8, shift=0)
+    # cv.Circle(img, (100, 100), 40, (255, 0, 0), thickness=1, lineType=8, shift=0)
 
     # Effets:
 
@@ -41,10 +43,16 @@ while True:
     # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#erode
     # cv.Erode(img, result, None, 1)
 
+    # http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html?highlight=haarcascades
+    detected = cv.HaarDetectObjects(img, haarcascade, cv.CreateMemStorage(), 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (0, 0))
+    if detected:
+        for face in detected:
+            print face
+
     # Shows the image
-    # cv.ShowImage("camera", img)
-    cv.ShowImage("temp", temp)
-    cv.ShowImage("diff", img)
+    cv.ShowImage("camera", img)
+    # cv.ShowImage("temp", temp)
+    # cv.ShowImage("diff", img)
 
     # Waits for the esc key to exit
     k = cv.WaitKey(7) % 0x100
