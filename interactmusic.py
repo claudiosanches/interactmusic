@@ -17,7 +17,7 @@ capture = cv.CreateCameraCapture(0)
 # temp = cv.CloneImage(frame)
 # cv.Smooth(temp, temp, cv.CV_BLUR, 5, 5)
 
-haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_smile.xml")
+haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_mcs_lefteye.xml")
 
 while True:
     # Creates the frame
