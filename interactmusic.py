@@ -5,17 +5,24 @@ cv.NamedWindow("camera", 1)
 capture = cv.CreateCameraCapture(0)
 
 # Detect the width
-width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
+# width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
 
 # Detect the height
-height = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT))
+# height = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT))
 
 # Creates the result image
-result = cv.CreateImage((width, height), cv.IPL_DEPTH_8U, 3)
+# result = cv.CreateImage((width, height), cv.IPL_DEPTH_8U, 3)
+
+frame = cv.QueryFrame(capture)
+temp = cv.CloneImage(frame)
+cv.Smooth(temp, temp, cv.CV_BLUR, 5, 5)
 
 while True:
     # Creates the frame
     img = cv.QueryFrame(capture)
+
+    # http://opencv.willowgarage.com/documentation/python/core_operations_on_arrays.html?highlight=absdiff#absdiff
+    cv.AbsDiff(img, temp, img)
 
     # http://opencv.willowgarage.com/documentation/python/drawing_functions.html#rectangle
     cv.Rectangle(img, (200, 150), (300, 250), (0, 0, 255), 1, 0)
@@ -32,10 +39,12 @@ while True:
     # cv.Dilate(img, result, None, 5)
 
     # http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html#erode
-    cv.Erode(img, result, None, 1)
+    # cv.Erode(img, result, None, 1)
 
     # Shows the image
-    cv.ShowImage("camera", result)
+    # cv.ShowImage("camera", img)
+    cv.ShowImage("temp", temp)
+    cv.ShowImage("diff", img)
 
     # Waits for the esc key to exit
     k = cv.WaitKey(7) % 0x100
