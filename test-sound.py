@@ -1,7 +1,13 @@
 #!/usr/bin/env python
-# http://www.pyglet.org/doc/api/index.html
-import pyglet
+# http://www.pygame.org/docs/ref/mixer.html
+import pygame
 
-music = pyglet.media.load('guitarra.ogg')
+pygame.init()
+music = pygame.mixer.Sound('guitarra.ogg')
+clock = pygame.time.Clock()
 music.play()
-pyglet.app.run()
+
+while True:
+    clock.tick(5)
+
+pygame.quit()
