@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import cv
+import pygame
 
 cv.NamedWindow("camera", 1)
 capture = cv.CreateCameraCapture(0)
@@ -17,7 +18,11 @@ capture = cv.CreateCameraCapture(0)
 # temp = cv.CloneImage(frame)
 # cv.Smooth(temp, temp, cv.CV_BLUR, 5, 5)
 
-haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_mcs_lefteye.xml")
+haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml")
+
+pygame.init()
+music = pygame.mixer.Sound('guitarra.ogg')
+
 
 while True:
     # Creates the frame
@@ -46,6 +51,8 @@ while True:
     # http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html?highlight=haarcascades
     detected = cv.HaarDetectObjects(img, haarcascade, cv.CreateMemStorage(), 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (0, 0))
     if detected:
+        music.play()
+
         for (x, y, w, h), n in detected:
             cv.Rectangle(img, (x, y), (x+w, y+h), 255)
 
