@@ -17,10 +17,10 @@ while True:
     # http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html?highlight=haarcascades
     detected = cv.HaarDetectObjects(img, haarcascade, cv.CreateMemStorage(), 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (0, 0))
     if detected:
-        music.play()
-
         for (x, y, w, h), n in detected:
             cv.Rectangle(img, (x, y), (x+w, y+h), 255)
+            if x > 100:
+                music.play()
 
     # Shows the image
     cv.ShowImage("camera", img)
