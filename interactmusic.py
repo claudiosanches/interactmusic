@@ -20,7 +20,9 @@ while True:
         for (x, y, w, h), n in detected:
             cv.Rectangle(img, (x, y), (x+w, y+h), 255)
             if x > 100:
-                music.play()
+                # http://www.pygame.org/docs/ref/mixer.html#pygame.mixer.get_busy
+                if not music.get_busy():
+                    music.play()
 
     # Shows the image
     cv.ShowImage("camera", img)
