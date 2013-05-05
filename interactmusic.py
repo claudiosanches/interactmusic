@@ -5,7 +5,7 @@ import pygame
 cv.NamedWindow("camera", 1)
 capture = cv.CreateCameraCapture(0)
 
-haarcascade = cv.Load("/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml")
+haarcascade = cv.Load("haarcascades/haarcascade_frontalface_default.xml")
 
 pygame.init()
 music = pygame.mixer.Sound('guitarra.ogg')
