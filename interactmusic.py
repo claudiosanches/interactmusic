@@ -6,7 +6,7 @@ import pygame
 class InteractMusic:
     def __init__(self):
         self.name = "InteractMusic"
-        pygame.mixer.init()
+        pygame.mixer.init(frequency=44100, size=-16, channels=4)
         self.capture = cv.CaptureFromCAM(0)
         cv.NamedWindow(self.name, 1)
         self.hc = cv.Load("haarcascades/haarcascade_frontalface_default.xml")
@@ -14,6 +14,10 @@ class InteractMusic:
         # audio tracks
         self.audio1 = pygame.mixer.Sound('guitarra.ogg')
         self.audio2 = pygame.mixer.Sound('bateria.ogg')
+
+        # audio channels
+        self.channel1 = pygame.mixer.Channel(1)
+        self.channel2 = pygame.mixer.Channel(2)
 
     def is_intersect(self, ax, ay, aw, ah, bx, by, bw, bh):
         return ax < bw and aw > bx and ay < bh and ah > by
@@ -49,13 +53,13 @@ class InteractMusic:
                 # Test the first rectangle and play the audio
                 if (self.is_intersect(rec1x, rec1y, rec1w, rec1h, camX, camY, camW, camH)):
                     # Checks if the channel is busy
-                    if not self.audio1.get_busy():
-                        self.audio1.play()
+                    if not self.channel1.get_busy():
+                        self.channel1.play(self.audio1)
 
                 if (self.is_intersect(rec2x, rec2y, rec2w, rec2h, camX, camY, camW, camH)):
                     # Checks if the channel is busy
-                    if not self.audio1.get_busy():
-                        self.audio1.play()
+                    if not self.channel2.get_busy():
+                        self.channel2.play(self.audio2)
 
             # Waits for the esc key to exit
             c = cv.WaitKey(7) % 0x100
