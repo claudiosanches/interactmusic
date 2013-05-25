@@ -12,12 +12,14 @@ class InteractMusic:
         self.hc = cv.Load("haarcascades/haarcascade_frontalface_default.xml")
 
         # audio tracks
-        self.audio1 = pygame.mixer.Sound('guitarra.ogg')
-        self.audio2 = pygame.mixer.Sound('bateria.ogg')
+        self.audio1 = pygame.mixer.Sound('media/eletric5.ogg')
+        self.audio2 = pygame.mixer.Sound('media/eletric7.ogg')
+        self.audio3 = pygame.mixer.Sound('media/eletric4.ogg')  # base
 
         # audio channels
         self.channel1 = pygame.mixer.Channel(1)
         self.channel2 = pygame.mixer.Channel(2)
+        self.channel3 = pygame.mixer.Channel(3)
 
     def is_intersect(self, ax, ay, aw, ah, bx, by, bw, bh):
         return ax < bw and aw > bx and ay < bh and ah > by
@@ -26,6 +28,8 @@ class InteractMusic:
         while True:
             webcam = cv.QueryFrame(self.capture)
             face = cv.HaarDetectObjects(webcam, self.hc, cv.CreateMemStorage(), 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (0, 0))
+            if not self.channel3.get_busy():
+                self.channel3.play(self.audio3)
 
             for ((x, y, w, h), k) in face:
                 # First rectangle
