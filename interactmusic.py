@@ -40,8 +40,8 @@ class InteractMusic:
                 cv.Rectangle(webcam, (rec1x, rec1y), (rec1w, rec1h), (0, 0, 255), 1, 0)
 
                 # Second rectangle
-                rec2x = 100
-                rec2y = 250
+                rec2x = 400
+                rec2y = 50
                 rec2w = rec2x + 100
                 rec2h = rec2y + 100
                 cv.Rectangle(webcam, (rec2x, rec2y), (rec2w, rec2h), (0, 0, 255), 1, 0)
