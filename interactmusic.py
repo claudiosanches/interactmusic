@@ -49,7 +49,7 @@ class InteractMusic:
 
                 # Second rectangle
                 rec2x = 400
-                rec2y = 50
+                rec2y = 100
                 rec2w = rec2x + 50
                 rec2h = rec2y + 50
                 cv.Rectangle(webcam, (rec2x, rec2y), (rec2w, rec2h), (0, 0, 255), 1, 0)
@@ -62,8 +62,8 @@ class InteractMusic:
                 cv.Rectangle(webcam, (rec3x, rec3y), (rec3w, rec3h), (0, 0, 255), 1, 0)
 
                 # Fourth rectangle
-                rec4x = 400
-                rec4y = 400
+                rec4x = 300
+                rec4y = 150
                 rec4w = rec4x + 50
                 rec4h = rec4y + 50
                 cv.Rectangle(webcam, (rec4x, rec4y), (rec4w, rec4h), (0, 0, 255), 1, 0)
@@ -77,7 +77,7 @@ class InteractMusic:
 
                 # Sixth rectangle
                 rec6x = 50
-                rec6y = 400
+                rec6y = 200
                 rec6w = rec6x + 50
                 rec6h = rec6y + 50
                 cv.Rectangle(webcam, (rec6x, rec6y), (rec6w, rec6h), (0, 0, 255), 1, 0)
